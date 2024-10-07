@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Age Calculator</title>
+  </head>
+
+  <style>
+    body {
+      background-color: #eceff1;
+    }
+    .content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 80vh;
+      width: 60vw;
+      margin: auto;
+      padding: 0 20px 0 20px;
+    }
+    .calculate {
+      background-color: #c8e6c9;
+    }
+    form {
+      min-width: none;
+      display: flex;
+      flex-direction: column;
+      padding: 1em;
+      border-radius: 5px;
+      box-shadow: 5px 5px #263238;
+    }
+    h2 {
+      text-align: center;
+    }
+    label {
+      padding: 0.5rem;
+    }
+    input {
+      margin: 0.5rem 0 0.5rem 0;
+      padding: 0.3rem;
+    }
+    button {
+      margin: 1.5em 0;
+      padding: 0.3rem 1rem 0.3rem 1rem;
+      background-color: #efebe9;
+      border-style: none;
+      font-weight: bolder;
+      color: black;
+    }
+    button:hover {
+      background-color: #80cbc4;
+      color: white;
+    }
+  </style>
+
+  <body>
+    <div class="content">
+      <h2>MY AGE CALCULATOR</h2>
+      <form id="calculate" class="calculate">
+        <label for="name"
+          >Enter Name:
+          <input id="name" type="text" placeholder="Your name" required
+        /></label>
+        <label for="dob"
+          >Enter Date of Birth: <input id="dob" type="date" required
+        /></label>
+        <button type="submit" onclick="handleClick(dob)">Calculate Age</button>
+      </form>
+    </div>
+  </body>
+
+  <script>
+    const calculateAge = (dob) => {
+      const today = new Date();
+      const birthDate = new Date(dob);
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const monthDifference = today.getMonth() - birthDate.getMonth();
+
+      // Adjusts the age if the birthday hasn't occurred yet this year
+      if (
+        monthDifference < 0 ||
+        (monthDifference === 0 && today.getDate() < birthDate.getDate())
+      ) {
+        age--;
+      }
+      return age;
+    };
+
+    const displayPopup = (message) => {
+      alert(message); // Display the message in a popup
+    };
+
+    document
+      .getElementById("calculate")
+      .addEventListener("submit", function (e) {
+        e.preventDefault;
+
+        const name = document.getElementById("name").value;
+        const dob = document.getElementById("dob").value;
+        const age = calculateAge(dob);
+
+        const message = `Congratulations ${name}, you are ${age} years old.`;
+        displayPopup(message);
+      });
+  </script>
+</html>
